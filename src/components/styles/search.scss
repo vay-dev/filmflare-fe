@@ -1,0 +1,220 @@
+// Updated styles for search component
+
+.search__component {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+
+  .input__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    transition: var(--total-transition);
+
+    &:focus-within {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px var(--accent-bg-2);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .icon-con {
+      display: flex;
+      align-items: center;
+      margin-right: 0.75rem;
+      color: var(--gray-color);
+
+      .glass {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    .input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: white;
+      font-size: 1rem;
+      placeholder-color: var(--gray-color);
+
+      &::placeholder {
+        color: var(--gray-color);
+        opacity: 0.8;
+      }
+    }
+
+    .close__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: var(--total-transition);
+      opacity: 0.7;
+
+      &:hover {
+        background: var(--accent-color);
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      &__icon {
+        width: 14px;
+        height: 14px;
+        color: white;
+      }
+    }
+  }
+
+  .info__text {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+
+    .search {
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 0.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(10px);
+
+    .tab {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      background: none;
+      border: none;
+      border-radius: calc(var(--radius-md) - 0.25rem);
+      color: var(--text-secondary);
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--total-transition);
+      text-align: center;
+
+      &:hover:not(.selected) {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+
+      &.selected {
+        background: var(--accent-color);
+        color: white;
+        box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);
+      }
+    }
+  }
+
+  .suggestions {
+    margin-top: 1.5rem;
+
+    .suggestions-header {
+      margin-bottom: 1rem;
+      padding: 0 0.5rem;
+
+      .suggestions-title {
+        color: white;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+    }
+
+    .suggestions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.75rem;
+    }
+
+    &__button {
+      padding: 0.75rem 1rem;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      color: white;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--total-transition);
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover:not(.selected) {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-1px);
+      }
+
+      &.selected {
+        background: var(--accent-bg-1);
+        border-color: var(--accent-color);
+        color: var(--accent-color);
+        box-shadow: 0 4px 12px rgba(233, 69, 96, 0.2);
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .search__component {
+    margin: 1.5rem auto;
+    padding: 0 0.5rem;
+
+    .input__wrapper {
+      padding: 0.5rem 0.75rem;
+
+      .input {
+        font-size: 0.9rem;
+      }
+    }
+
+    .tabs {
+      .tab {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    .suggestions {
+      .suggestions-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 0.5rem;
+      }
+
+      &__button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .search__component {
+    .suggestions {
+      .suggestions-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}

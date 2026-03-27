@@ -1,0 +1,90 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+// variables.scss
+
+// ===== Color System ===== //
+$primary: #ff6b6b; // main brand color
+$secondary: #4ecdc4; // supporting color
+$accent: #ffe66d; // highlight/tertiary
+
+:root {
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+
+  --radius-sm: 375rem;
+}
+
+// ===== Theme Handling ===== //
+body {
+  background-color: #ffffff;
+  color: #111111;
+  font-family: "Inter", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.darkmode {
+  background-color: #0f0f23;
+  color: #ffffff;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+}
+
+.badge {
+  font-size: 0.8rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-block;
+}
+
+// ===== Variants ===== //
+.badge-purple {
+  color: #a855f7;
+  background: linear-gradient(135deg, #a855f733, #a855f71a);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.badge-amber {
+  color: #f59e0b;
+  background: linear-gradient(135deg, #f59e0b33, #f59e0b1a);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-green {
+  color: #10b981;
+  background: linear-gradient(135deg, #10b98133, #10b9811a);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+}

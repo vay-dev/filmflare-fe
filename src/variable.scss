@@ -1,0 +1,17 @@
+:root {
+  --accent-color: #e94560; /* your pink/red */
+  --accent-bg-1: #e9456033; /* ~20% alpha */
+  --accent-bg-2: #e945601a; /* ~10% alpha */
+  --accent-border: rgba(233, 69, 96, 0.35);
+  --gray-color: #aaa;
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --radius-md: 15px;
+
+  // === all transitions ===
+  --total-transition: all 0.3s ease;
+
+  // === font and typography === //
+  --text-secondary: #b3b3b3;
+}

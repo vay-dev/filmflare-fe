@@ -1,0 +1,160 @@
+.movie-carousel {
+  position: relative;
+  margin-bottom: 3rem;
+  overflow: hidden;
+
+  .carousel-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(20px) brightness(0.3);
+    z-index: -1;
+    transform: scale(1.1); // Prevent edge artifacts
+  }
+
+  .carousel-content {
+    position: relative;
+    z-index: 1;
+    padding: 2rem 1rem;
+  }
+
+  .carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .carousel-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .carousel-item {
+    padding: 0 0.5rem;
+
+    > div {
+      height: 100%;
+    }
+  }
+
+  // Custom arrows styling
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--total-transition);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    z-index: 10;
+
+    .icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    &:hover {
+      background: var(--accent-color);
+      transform: translateY(-50%) scale(1.1);
+      border-color: var(--accent-color);
+    }
+
+    &--left {
+      left: -25px;
+    }
+
+    &--right {
+      right: -25px;
+    }
+
+    &.slick-disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.7);
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  // Slick dots customization
+  :global(.slick-dots) {
+    bottom: -40px;
+
+    li {
+      margin: 0 4px;
+
+      button {
+        &:before {
+          font-size: 8px;
+          color: rgba(255, 255, 255, 0.3);
+          opacity: 1;
+        }
+      }
+
+      &.slick-active button:before {
+        color: var(--accent-color);
+        opacity: 1;
+      }
+    }
+  }
+
+  // Hide arrows on mobile
+  @media (max-width: 768px) {
+    .carousel-btn {
+      display: none !important;
+    }
+  }
+}
+
+// Genre-specific carousel with background
+.movie-carousel.carousel--genre {
+  border-radius: var(--radius-md);
+  margin: 2rem 0;
+
+  .carousel-background {
+    border-radius: var(--radius-md);
+  }
+
+  .carousel-content {
+    background: linear-gradient(
+      135deg,
+      rgba(233, 69, 96, 0.1) 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+    border-radius: var(--radius-md);
+    border: 1px solid var(--accent-border);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .movie-carousel {
+    .carousel-content {
+      padding: 1rem 0.5rem;
+    }
+
+    .carousel-title {
+      font-size: 1.2rem;
+    }
+  }
+}
