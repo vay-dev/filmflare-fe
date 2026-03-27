@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Bell, Lock, Palette, Globe, Download, Eye } from 'lucide-react';
+import { Bell, Lock, Palette } from 'lucide-react';
 import Button from '../shared/Button';
 
 const DashboardSettings = () => {

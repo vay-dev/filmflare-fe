@@ -54,7 +54,7 @@ export const VideoCard = ({ video, isLarge = false, showDetails = false, onUpdat
 
     setLoading(true);
     try {
-      const response = await videoService.toggleFavorite(video.id);
+      await videoService.toggleFavorite(video.id);
       setIsFavorited(!isFavorited);
       if (onUpdate) onUpdate();
     } catch (error) {

@@ -36,7 +36,6 @@ export const MovieCard: React.FC<MovieCardProps> = ({
   isLarge = false,
   showDetails = false,
 }) => {
-  const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
   const getMovieGenres = (genreIds: number[]) => {
     return (

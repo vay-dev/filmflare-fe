@@ -20,7 +20,7 @@ interface VideoPlayerProps {
 const VideoPlayer = ({
   videoUrl,
   youtubeTrailerKey,
-  poster,
+  poster: _poster,
   onClose,
 }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
