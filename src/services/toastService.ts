@@ -27,7 +27,6 @@ class ToastService {
   show(message: string, type: ToastType = 'info', duration: number = 4000) {
     const id = Math.random().toString(36).substring(7);
     const toast: Toast = { id, message, type, duration };
-
     this.toasts.push(toast);
     this.notify();
 

@@ -25,13 +25,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
     setLoading(false);
 
-    // Re-sync user state when localStorage changes (e.g. after silent token refresh)
     const handleStorage = () => {
       const refreshedUser = authService.getCurrentUser();
       setUser(refreshedUser);
     };
+    const handleForceLogout = () => {
+      setUser(null);
+    };
     window.addEventListener('storage', handleStorage);
-    return () => window.removeEventListener('storage', handleStorage);
+    window.addEventListener('auth:logout', handleForceLogout);
+    return () => {
+      window.removeEventListener('storage', handleStorage);
+      window.removeEventListener('auth:logout', handleForceLogout);
+    };
   }, []);
 
   const login = async (credentials: LoginCredentials) => {

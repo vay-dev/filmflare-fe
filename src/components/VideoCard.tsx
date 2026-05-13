@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Play, Plus, Heart, Star, Check } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { videoService } from '../services/videoService';
+import { toast } from '../services/toastService';
 import type { Video } from '../interfaces/video.interface';
 import VideoPlayer from './VideoPlayer';
 import './styles/videoCard.scss';
@@ -22,24 +23,29 @@ export const VideoCard = ({ video, isLarge = false, showDetails = false, onUpdat
   const [loading, setLoading] = useState(false);
 
   const handlePlay = () => {
+    if (!isAuthenticated) {
+      toast.info('Please login to watch videos');
+      return;
+    }
     setShowPlayer(true);
   };
 
   const handleLike = async (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!isAuthenticated) {
-      alert('Please login to like videos');
+      toast.info('Please login to like videos');
       return;
     }
 
     setLoading(true);
     try {
       await videoService.toggleLike(video.id);
-      setIsLiked(!isLiked);
-      setLikesCount(prev => isLiked ? prev - 1 : prev + 1);
-    } catch (error) {
-      console.error('Failed to like video:', error);
-      alert('Failed to like video');
+      const nowLiked = !isLiked;
+      setIsLiked(nowLiked);
+      setLikesCount(prev => nowLiked ? prev + 1 : prev - 1);
+      toast.success(nowLiked ? 'Added to liked videos' : 'Removed from liked videos');
+    } catch {
+      toast.error('Failed to like video. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -48,18 +54,19 @@ export const VideoCard = ({ video, isLarge = false, showDetails = false, onUpdat
   const handleFavorite = async (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!isAuthenticated) {
-      alert('Please login to add favorites');
+      toast.info('Please login to add favorites');
       return;
     }
 
     setLoading(true);
     try {
       await videoService.toggleFavorite(video.id);
-      setIsFavorited(!isFavorited);
+      const nowFavorited = !isFavorited;
+      setIsFavorited(nowFavorited);
+      toast.success(nowFavorited ? 'Added to favorites' : 'Removed from favorites');
       if (onUpdate) onUpdate();
-    } catch (error) {
-      console.error('Failed to add favorite:', error);
-      alert('Failed to add to favorites');
+    } catch {
+      toast.error('Failed to update favorites. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -99,37 +106,43 @@ export const VideoCard = ({ video, isLarge = false, showDetails = false, onUpdat
           }}
         />
         <div className="video-card__overlay">
-          <div className="video-card__actions">
-            <button
-              onClick={handlePlay}
-              className="btn-action btn-action--play"
-              title="Play"
-            >
-              <Play className="icon" />
-            </button>
-
-            {isAuthenticated && (
-              <>
-                <button
-                  onClick={handleFavorite}
-                  className={`btn-action ${isFavorited ? 'btn-action--favorited' : 'btn-action--add'}`}
-                  disabled={loading}
-                  title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
-                >
-                  {isFavorited ? <Check className="icon" /> : <Plus className="icon" />}
-                </button>
-
-                <button
-                  onClick={handleLike}
-                  className={`btn-action ${isLiked ? 'btn-action--liked' : 'btn-action--like'}`}
-                  disabled={loading}
-                  title={isLiked ? 'Unlike' : 'Like'}
-                >
-                  <Heart className={`icon ${isLiked ? 'filled' : ''}`} />
-                </button>
-              </>
-            )}
-          </div>
+          {isAuthenticated ? (
+            <div className="video-card__actions">
+              <button
+                onClick={handlePlay}
+                className="btn-action btn-action--play"
+                title="Play"
+              >
+                <Play className="icon" />
+              </button>
+              <button
+                onClick={handleFavorite}
+                className={`btn-action ${isFavorited ? 'btn-action--favorited' : 'btn-action--add'}`}
+                disabled={loading}
+                title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+              >
+                {isFavorited ? <Check className="icon" /> : <Plus className="icon" />}
+              </button>
+              <button
+                onClick={handleLike}
+                className={`btn-action ${isLiked ? 'btn-action--liked' : 'btn-action--like'}`}
+                disabled={loading}
+                title={isLiked ? 'Unlike' : 'Like'}
+              >
+                <Heart className={`icon ${isLiked ? 'filled' : ''}`} />
+              </button>
+            </div>
+          ) : (
+            <div className="video-card__actions">
+              <button
+                onClick={handlePlay}
+                className="btn-action btn-action--play"
+                title="Login to watch"
+              >
+                <Play className="icon" />
+              </button>
+            </div>
+          )}
 
           <div className="video-card__likes">
             <Heart size={14} />

@@ -51,10 +51,10 @@ api.interceptors.response.use(
           return api(originalRequest);
         }
       } catch (refreshError) {
-        // Refresh failed, logout user
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         localStorage.removeItem('user');
+        window.dispatchEvent(new CustomEvent('auth:logout'));
         window.location.href = '/login';
         return Promise.reject(refreshError);
       }

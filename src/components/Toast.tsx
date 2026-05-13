@@ -27,20 +27,20 @@ const Toast = () => {
   };
 
   return (
-    <div className="toast-container">
+    <div className="app-toast-container">
       {toasts.map((toast) => (
         <div
           key={toast.id}
-          className={`toast toast--${toast.type}`}
+          className={`app-toast app-toast--${toast.type}`}
         >
-          <div className="toast__icon">
+          <div className="app-toast__icon">
             {getIcon(toast.type)}
           </div>
-          <div className="toast__message">
+          <div className="app-toast__message">
             {toast.message}
           </div>
           <button
-            className="toast__close"
+            className="app-toast__close"
             onClick={() => toastService.remove(toast.id)}
             aria-label="Close"
           >

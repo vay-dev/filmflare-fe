@@ -1,8 +1,8 @@
-.toast-container {
+.app-toast-container {
   position: fixed;
   top: 1.5rem;
   right: 1.5rem;
-  z-index: 10000;
+  z-index: 2147483647;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -17,7 +17,7 @@
   }
 }
 
-.toast {
+.app-toast {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -27,6 +27,8 @@
   border-radius: 6px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
+  opacity: 1;
+  visibility: visible;
   pointer-events: auto;
   animation: slideIn 0.3s ease-out;
   min-width: 320px;
@@ -77,7 +79,7 @@
   &--success {
     border-left-color: #46d369;
 
-    .toast__icon {
+    .app-toast__icon {
       color: #46d369;
     }
   }
@@ -85,7 +87,7 @@
   &--error {
     border-left-color: #e50914;
 
-    .toast__icon {
+    .app-toast__icon {
       color: #e50914;
     }
   }
@@ -93,7 +95,7 @@
   &--warning {
     border-left-color: #f5a623;
 
-    .toast__icon {
+    .app-toast__icon {
       color: #f5a623;
     }
   }
@@ -101,7 +103,7 @@
   &--info {
     border-left-color: #0071eb;
 
-    .toast__icon {
+    .app-toast__icon {
       color: #0071eb;
     }
   }
